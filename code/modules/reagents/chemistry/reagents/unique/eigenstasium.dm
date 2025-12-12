@@ -40,6 +40,8 @@
 	. = ..()
 	if(!(methods & INGEST) || !iscarbon(living_mob))
 		return
+	if(reac_volume <= 1)
+		return
 	//This looks rediculous, but expose is usually called from the donor reagents datum - we want to edit the post exposure version present in the mob.
 	var/mob/living/carbon/carby = living_mob
 	//But because carbon mobs have stomachs we have to search in there because we're ingested
@@ -54,6 +56,8 @@
 
 //Main functions
 /datum/reagent/eigenstate/on_mob_add(mob/living/living_mob, amount)
+	if(amount <= 1)
+		return
 	//make hologram at return point to indicate where someone will go back to
 	eigenstate = new (living_mob.loc)
 	eigenstate.appearance = living_mob.appearance
@@ -78,6 +82,8 @@
 
 /datum/reagent/eigenstate/on_mob_life(mob/living/carbon/living_mob)
 	. = ..()
+	if(volume <= 1)
+		return
 	if(prob(20))
 		do_sparks(5,FALSE,living_mob)
 
