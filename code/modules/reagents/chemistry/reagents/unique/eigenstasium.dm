@@ -38,9 +38,7 @@
 
 /datum/reagent/eigenstate/expose_mob(mob/living/living_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if(!(methods & INGEST) || !iscarbon(living_mob))
-		return
-	if(reac_volume <= 1)
+	if(!(methods & INGEST) || !iscarbon(living_mob) || reac_volume <= 1)
 		return
 	//This looks rediculous, but expose is usually called from the donor reagents datum - we want to edit the post exposure version present in the mob.
 	var/mob/living/carbon/carby = living_mob
